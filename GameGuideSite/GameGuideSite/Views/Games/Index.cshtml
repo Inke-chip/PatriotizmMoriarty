@@ -1,4 +1,42 @@
-﻿@page
-@model GameGuideSite.Views.Games.IndexModel
+﻿@model List<GameGuideSite.Models.Game>
+
 @{
+    ViewData["Title"] = "Актуальные онлайн-игры";
 }
+
+<div class="text-center py-4 mb-4" style="background: rgba(0,0,0,0.4); border-radius: 1.5rem;">
+    <h1 style="color: white; font-size: 1.8rem;">🎮 GameGuideHub</h1>
+    <p style="color: #d4d0e8; font-size: 0.9rem;">Описания, оценки, онлайн, лор, обновления и гайды</p>
+</div>
+
+<div class="row g-3">
+    @foreach (var game in Model)
+    {
+        <div class="col-md-6 col-lg-4">
+            <div style="background: #2a1a40; border-radius: 1rem; border: 1px solid #9b4dff; padding: 12px; height: auto;">
+
+                <h4 style="color: white; font-size: 1.2rem; margin: 0 0 5px 0;">@game.Title</h4>
+                <p style="color: #c8b8e0; font-size: 0.8rem; margin: 0 0 8px 0;">@game.Description</p>
+
+                <div style="margin-bottom: 8px;">
+                    <span style="background: #5a2d8c; font-size: 0.7rem; padding: 2px 8px; border-radius: 1rem; color: white;">⭐ @game.Rating / 10</span>
+                    <span style="background: #5a2d8c; font-size: 0.7rem; padding: 2px 8px; border-radius: 1rem; color: white;">👥 @game.OnlinePlayers.ToString("N0")</span>
+                </div>
+
+                <div style="margin-bottom: 6px;">
+                    <div style="font-size: 0.7rem; color: #b894f0;">📜 Лор:</div>
+                    <div style="color: #c8b8e0; font-size: 0.75rem;">@(game.Lore.Length > 70 ? game.Lore.Substring(0, 70) + "..." : game.Lore)</div>
+                </div>
+
+                <div style="margin-bottom: 10px;">
+                    <div style="font-size: 0.7rem; color: #b894f0;">🔄 Обновление:</div>
+                    <div style="color: #c8b8e0; font-size: 0.75rem;">@(game.LastUpdateSummary.Length > 70 ? game.LastUpdateSummary.Substring(0, 70) + "..." : game.LastUpdateSummary)</div>
+                </div>
+
+                <a href="@Url.Action("Details", "Games", new { id = game.Id })" style="display: block; background: linear-gradient(95deg, #9b4dff, #6a1b9a); border-radius: 2rem; padding: 5px; font-size: 0.8rem; text-align: center; color: white; text-decoration: none;">
+                    🔍 Подробнее →
+                </a>
+            </div>
+        </div>
+    }
+</div>

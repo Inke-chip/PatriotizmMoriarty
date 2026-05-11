@@ -1,4 +1,56 @@
-﻿@page
-@model GameGuideSite.Views.Games.DetailsModel
+﻿@model GameGuideSite.Models.Game
+
 @{
+    ViewData["Title"] = Model.Title + " — гайды и лор";
 }
+
+<div class="text-white text-center py-3 mb-4" style="background: rgba(0,0,0,0.4); border-radius: 1rem;">
+    <h1 style="color: white; font-size: 1.6rem; margin: 0;">@Model.Title</h1>
+    <p style="color: #d4d0e8; margin: 5px 0 0 0;">@Model.Description</p>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <ul class="nav nav-tabs mb-3" style="border-bottom: none;" id="gameTab" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#desc" style="background: #2a1a40; color: white; border-radius: 0.75rem 0.75rem 0 0; border: none; padding: 5px 12px;">📖 Описание</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#lore" style="background: #2a1a40; color: white; border-radius: 0.75rem 0.75rem 0 0; border: none; padding: 5px 12px;">📜 Лор</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#updates" style="background: #2a1a40; color: white; border-radius: 0.75rem 0.75rem 0 0; border: none; padding: 5px 12px;">🔄 Обновления</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#guide" style="background: #2a1a40; color: white; border-radius: 0.75rem 0.75rem 0 0; border: none; padding: 5px 12px;">🎯 Гайды</button>
+            </li>
+        </ul>
+
+        <div class="tab-content p-3 mb-4" style="background: #2a1a40; border-radius: 0.75rem; border: 1px solid #9b4dff;">
+            <div class="tab-pane fade show active" id="desc" role="tabpanel">
+                <p style="color: #c8b8e0; font-size: 0.85rem;">@Model.Description</p>
+                <hr style="border-color: #6a1b9a;" />
+                <p style="color: #c8b8e0; font-size: 0.8rem;"><strong>⭐ Оценка:</strong> @Model.Rating / 10</p>
+                <p style="color: #c8b8e0; font-size: 0.8rem;"><strong>👥 Онлайн:</strong> @Model.OnlinePlayers.ToString("N0") игроков</p>
+            </div>
+            <div class="tab-pane fade" id="lore" role="tabpanel">
+                <p style="color: #c8b8e0; font-size: 0.85rem;">@Model.Lore</p>
+            </div>
+            <div class="tab-pane fade" id="updates" role="tabpanel">
+                <p style="color: #c8b8e0; font-size: 0.85rem;">@Model.LastUpdateSummary</p>
+            </div>
+            <div class="tab-pane fade" id="guide" role="tabpanel">
+                <p style="color: #c8b8e0; font-size: 0.8rem;">Полный гайд по игре:</p>
+                <a href="@Model.GuideLink" style="background: #9b4dff; border-radius: 2rem; padding: 5px 15px; color: white; font-size: 0.8rem; text-decoration: none;">📘 Читать гайд</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div style="background: #2a1a40; border-radius: 0.75rem; border: 1px solid #9b4dff; padding: 12px;">
+            <h5 style="color: white; margin: 0 0 8px 0;">📊 Статистика</h5>
+            <p style="color: #c8b8e0; font-size: 0.8rem; margin: 0 0 5px 0;">⭐ Рейтинг: <strong>@Model.Rating / 10</strong></p>
+            <p style="color: #c8b8e0; font-size: 0.8rem; margin: 0;">👥 Онлайн: <strong>@Model.OnlinePlayers.ToString("N0")</strong></p>
+        </div>
+    </div>
+</div>
